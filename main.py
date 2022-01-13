@@ -1,34 +1,29 @@
 import random
 
-
-def demander_mode():
-    print("Mode facile : Nombre maximum = 10")
-    print("Mode moyen : Nombre maximum = 25")
-    print("Mode difficile : Nombre maximum = 50")
-    print("Mode expert : Nombre maximum = 100")
-    print("Mode impossible : Nombre maximum = 999")
-    print("Mode battle : La personne qui a le meilleur score gagne. (Nombre maximum = 20)")
-    print()
+def demander_mode(): # choix par l'utilisateur du mode avec nbr max détaillé
+    print("Mode facile : Nombre maximum = 10\n"
+    "Mode moyen : Nombre maximum = 25\n"
+    "Mode difficile : Nombre maximum = 50\n"
+    "Mode expert : Nombre maximum = 100\n"
+    "Mode impossible : Nombre maximum = 999\n"
+    "Mode battle : La personne qui a le meilleur score gagne. (Nombre maximum = 20)\n")
     mode_str = input("Voulez-vous jouer en mode facile (1), moyen (2), difficile (3), expert (4), impossible (5), libre (6) ou battle (7) ? ")
     mode_int = 10
     while mode_int == 10:
         try:
            mode_int = int(mode_str)
         except:
-            print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.")
+            print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.\n")
             mode_int = 10
-            print()
             mode_str = input("Voulez-vous jouer en mode facile (1), moyen (2), difficile (3), expert (4), impossible (5), libre (6) ou battle (7) ? ")
         else:
             if mode_int < 1:
-                print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.")
+                print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.\n")
                 mode_int = 10
-                print()
                 mode_str = input("Voulez-vous jouer en mode facile (1), moyen (2), difficile (3), expert (4), impossible (5), libre (6) ou battle (7) ? ")
             elif mode_int > 7:
-                print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.")
+                print("ERREUR: Vous devez rentrer un chiffre entre 1 et 7.\n")
                 mode_int = 10
-                print()
                 mode_str = input("Voulez-vous jouer en mode facile (1), moyen (2), difficile (3), expert (4), impossible (5), libre (6) ou battle (7) ? ")
     if mode_int == 0:
         print("Le nombre maximum est 10.")
@@ -41,12 +36,11 @@ def demander_mode():
     elif mode_int == 4:
         print("Le nombre maximum est 999.")
     elif mode_int == 6:
-        print("Le nombre maximum est 20.")
-    print()
+        print("Le nombre maximum est 20.\n")
     return mode_int
 
 
-def demander_nb_personnes():
+def demander_nb_personnes(): # choix par l'utilisateur du nbr de joueurs/joueuses
     global mode
     nb_personnes_int = 0
     if mode == 7:
@@ -55,17 +49,14 @@ def demander_nb_personnes():
             try:
                 nb_personnes_int = int(nb_personnes_str)
             except:
-                print("ERREUR: Vous devez rentrer un nombre pour le nombre de joueurs.")
-                print()
+                print("ERREUR: Vous devez rentrer un nombre pour le nombre de joueurs.\n")
         if nb_personnes_int < 2:
-            print("ERREUR: Le nombre de joueurs ne doit pas ếtre en dessous de 2. Réessayez.")
-            print()
+            print("ERREUR: Le nombre de joueurs ne doit pas ếtre en dessous de 2. Réessayez.\n")
             nb_personnes_int = 0
-    print()
     return nb_personnes_int
 
 
-def demander_nom():
+def demander_nom(): # choix du nom/pseudo pour chaque joueur/joueuse
     nomlist = []
     nom_str = ""
     reponse = ""
@@ -73,8 +64,7 @@ def demander_nom():
         for i in range(0, NB_PERSONNES):
             nom_str = input(f"Quel est votre nom Joueur {i + 1} ? ")
             while nom_str == "":
-                print("ERREUR: Vous devez entrer un nom valide.")
-                print()
+                print("ERREUR: Vous devez entrer un nom valide.\n")
                 nom_str = input(f"Quel est votre nom Joueur {i + 1} ? ")
             while reponse == "":
                 reponse = input(f'"{nom_str}" est bien le nom que vous choisissez ? (oui/non) ')
@@ -86,9 +76,8 @@ def demander_nom():
                     reponse = ""
                     print()
                 elif not reponse == "oui" or "non":
-                    print('ERREUR: Vous devez rentrer "oui" ou "non". Réessayez.')
+                    print('ERREUR: Vous devez rentrer "oui" ou "non". Réessayez.\n')
                     reponse = ""
-                    print()
             nomlist.append(nom_str)
             print()
             reponse = ""
@@ -96,18 +85,17 @@ def demander_nom():
         return nomlist
 
 
-def start():
+def start(): # fonction servant à lancer le jeu (poser les questions et donner le nombre de points pour chaque joueur/joueuse)
     global nom
     nb_points = 0
     if not mode == 7:
         for i in range(0, NB_QUESTIONS):
             print(f"Question n°{i + 1} sur {NB_QUESTIONS}:")
             if poser_question():
-                print("Réponse correcte.")
+                print("Réponse correcte.\n")
                 nb_points += 1
             else:
-                print("Réponse incorrecte.")
-            print()
+                print("Réponse incorrecte.\n")
         print(f"Votre note est : {nb_points} / {NB_QUESTIONS}.")
         moyenne = int(NB_QUESTIONS / 2)
         if nb_points == NB_QUESTIONS:
@@ -119,16 +107,14 @@ def start():
         elif nb_points > moyenne:
             print("Pas mal !")
         else:
-            print("Peut mieux faire !")
-        print()
+            print("Peut mieux faire !\n")
 
     else:
         scorelist = []
         n = -1
         for i in range(0, NB_PERSONNES):
             i += 1
-            print(f"Questions pour {nom[n+1]} :")
-            print()
+            print(f"Questions pour {nom[n+1]} :\n")
             n = n + 1
             for i in range(0, NB_QUESTIONS):
                 print(f"Question n°{i + 1} sur {NB_QUESTIONS}:")
@@ -136,8 +122,7 @@ def start():
                     print("Réponse correcte.")
                     nb_points += 1
                 else:
-                    print("Réponse incorrecte.")
-                print()
+                    print("Réponse incorrecte.\n")
             print(f"Votre note est : {nb_points} / {NB_QUESTIONS}.")
             moyenne = int(NB_QUESTIONS / 2)
             if nb_points == NB_QUESTIONS:
@@ -149,70 +134,67 @@ def start():
             elif nb_points > moyenne:
                 print("Pas mal !")
             else:
-                print("Peut mieux faire !")
-            print()
+                print("Peut mieux faire !\n")
             scorelist.append(nb_points)
             nb_points = 0
         infos = zip(nom, scorelist)
         infos_list = list(infos)
-        infos_list.sort(key=lambda x: x[1], reverse=True)
+        infos_list.sort(key=lambda x: x[1], reverse=True) # tri des informations pour que le nom est le score de chaque joueur/joueuse soit classé dans l'ordre décroissant
         gagnant = infos_list[0]
         nom_gagnant = gagnant[0]
         score_gagnant = gagnant[1]
         nb = 1
         infos_j = infos_list[nb]
-        print("Voici le classement :")
-        print()
-        print(f"{nom_gagnant} gagne avec un score de {score_gagnant} points. Bravo !")
-        print()
+        print("Voici le classement :\n")
+        print(f"{nom_gagnant} gagne avec un score de {score_gagnant} points. Bravo !\n")
         if NB_PERSONNES == 2:
             for i in range(2, NB_PERSONNES):
                 nom_j = infos_j[0]
                 score_j = infos_j[1]
-                print(f"{nom_j} termine à la {i}e place avec un score de {score_j} points.")
+                print(f"{nom_j} termine à la {i}e place avec un score de {score_j} points.\n")
                 i = i + 1
-                print()
         else:
             for i in range(1, NB_PERSONNES):
                 nom_j = infos_j[0]
                 score_j = infos_j[1]
-                print(f"{nom_j} termine à la {i+1}e place avec un score de {score_j} points.")
+                print(f"{nom_j} termine à la {i+1}e place avec un score de {score_j} points.\n")
                 if not nb == NB_PERSONNES-1:
                     nb = nb + 1
                     infos_j = infos_list[nb]
                 i = i + 1
                 print()
 
+
+# recherches pour fonction si égalité
 """for i in range(1, NB_PERSONNES):
     while not i == NB_PERSONNES:
         if list score[] == list score[]:
         print(...)"""
 
 
-def demander_difficulte(n_diff_str="5"):
+def demander_difficulte(n_diff_str="5"): # choix de la difficulté (opérations)
     print("a = additions")
     print("s = soustractions")
     print("m = multiplications")
-    print("d = divisions")
-    print()
-    print("Mode 1 = additions")
-    print("Mode 2 = soustractions")
-    print("Mode 3 = multiplications")
-    print("Mode 4 = divisions")
-    print("Mode 5 = a/s/m/d")
-    print("Mode 6 = a/s/m")
-    print("Mode 7 = a/s/d")
-    print("Mode 8 = a/m/d")
-    print("Mode 9 = s/m/d")
-    print("Mode 10 = a/s")
-    print("Mode 11 = a/m")
-    print("Mode 12 = a/d")
-    print("Mode 13 = s/m")
-    print("Mode 14 = s/d")
-    print("Mode 15 = m/d")
-    print()
+    print("d = divisions\n")
 
-    n_diff_str = input("Quel mode souhaitez-vous ? (Vous devez entrer un nombre) : ")
+    print("Difficulté 1 = additions")
+    print("Difficulté 2 = soustractions")
+    print("Difficulté 3 = multiplications")
+    print("Difficulté 4 = divisions")
+    print("Difficulté 5 = a/s/m/d")
+    print("Difficulté 6 = a/s/m")
+    print("Difficulté 7 = a/s/d")
+    print("Difficulté 8 = a/m/d")
+    print("Difficulté 9 = s/m/d")
+    print("Difficulté 10 = a/s")
+    print("Difficulté 11 = a/m")
+    print("Difficulté 12 = a/d")
+    print("Difficulté 13 = s/m")
+    print("Difficulté 14 = s/d")
+    print("Difficulté 15 = m/d\n")
+
+    n_diff_str = input("Quelle difficulté souhaitez-vous ? (Vous devez entrer un nombre) : ")
     n_diff_int = 0
     while n_diff_int == 0:
         try:
@@ -221,31 +203,30 @@ def demander_difficulte(n_diff_str="5"):
             print("ERREUR: Vous devez rentrer un chiffre entre 1 et 15.")
             n_diff_int = 0
             print()
-            n_diff_str = input("Quel mode souhaitez-vous ? (Vous devez entrer un nombre) : ")
+            n_diff_str = input("Quelle difficulté souhaitez-vous ? (Vous devez entrer un nombre) : ")
         else:
             if n_diff_int < 1:
                 print("ERREUR: Vous devez rentrer un chiffre entre 1 et 15.")
                 n_diff_int = 0
                 print()
-                n_diff_str = input("Quel mode souhaitez-vous ? (Vous devez entrer un nombre) : ")
+                n_diff_str = input("Quelle difficulté souhaitez-vous ? (Vous devez entrer un nombre) : ")
             elif n_diff_int > 15:
                 print("ERREUR: Vous devez rentrer un chiffre entre 1 et 15.")
                 n_diff_int = 0
                 print()
-                n_diff_str = input("Quel mode souhaitez-vous ? (Vous devez entrer un nombre) : ")
+                n_diff_str = input("Quelle difficulté souhaitez-vous ? (Vous devez entrer un nombre) : ")
     print()
     return n_diff_int
 
 
-def demander_nb_max():
+def demander_nb_max(): # choix du nbr max donné dans les operations
     nb_max_int = 0
     while nb_max_int == 0:
         nb_max_str = input("Quel nombre maximum voulez-vous dans les opérations ? ")
         try:
             nb_max_int = int(nb_max_str)
         except:
-            print("ERREUR: Vous devez rentrer un nombre. Réessayez.")
-            print()
+            print("ERREUR: Vous devez rentrer un nombre. Réessayez.\n")
         else:
             if nb_max_int < 10:
                 print("ERREUR: Le nombre ne doit pas être en dessous de 10. Réessayez.")
@@ -254,25 +235,23 @@ def demander_nb_max():
     return nb_max_int
 
 
-def demander_nb_questions():
+def demander_nb_questions(): # choix du nombre de questions posées au(x) joueur(s)/joueuse(s)
     nb_questions_int = 0
     while nb_questions_int == 0:
         nb_questions_str = input("Combien de questions voulez-vous ? ")
         try:
             nb_questions_int = int(nb_questions_str)
         except:
-            print("ERREUR: Vous devez rentrer un nombre. Réessayez.")
-            print()
+            print("ERREUR: Vous devez rentrer un nombre. Réessayez.\n")
         else:
             if nb_questions_int < 4:
-                print("ERREUR: Le nombre ne doit pas être en dessous de 4. Réessayez.")
-                print()
+                print("ERREUR: Le nombre ne doit pas être en dessous de 4. Réessayez.\n")
                 nb_questions_int = 0
     print()
     return nb_questions_int
 
 
-def poser_question():
+def poser_question(): # fonction utilisée pour créer et afficher les questions
     global diff
     a = random.randint(NOMBRE_MIN, NOMBRE_MAX)
     b = random.randint(NOMBRE_MIN, NOMBRE_MAX)
@@ -377,8 +356,7 @@ def poser_question():
         try:
             reponse_int = int(reponse_str)
         except:
-            print(f"ERREUR: Vous devez rentrer un nombre.")
-            print()
+            print(f"ERREUR: Vous devez rentrer un nombre.\n")
     calcul = a+b
 
     if diff == 1:
@@ -477,7 +455,7 @@ def poser_question():
     return False
 
 
-def nouvel_essai():
+def nouvel_essai(): # permet au(x) joueur(s)/joueuse(s) de relancer une partie
     nouvel_essai = ""
     while nouvel_essai == "":
         nouvel_essai = input("Voulez-vous réessayer ? (oui/non) ")
